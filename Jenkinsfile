@@ -7,17 +7,18 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
                 // Get some code from a GitHub repository
-                //git branch: 'main', url: 'https://github.com/georgerussellqa/lbg-hello-world-maven.git'
+                git branch: 'main', url: 'https://github.com/georgerussellqa/lbg-hello-world-maven.git'
 
                 // Run Maven on a Unix agent.
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                //sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn clean compile"
             }
+            
             
             //post {
             //    // If Maven was able to run the tests, even if some of the test
@@ -28,10 +29,20 @@ pipeline {
             //    }
             //}
         }
+        stage('Compile'){
+                steps{
+                    sh 'mvn clean compile'
+                }
+            }
         
         stage('Test') {
             steps {
                 sh "mvn test"
+            }
+        }
+        stage('Package'){
+            steps{
+                sh "mvn -Dmaven.test.skip package"
             }
         }
     }
