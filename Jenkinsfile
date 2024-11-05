@@ -7,8 +7,8 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
+        //stage('Checkout') {
+            //steps {
                 // Get some code from a GitHub repository
                 //git branch: 'main', url: 'https://github.com/georgerussellqa/lbg-hello-world-maven.git'
 
@@ -17,7 +17,7 @@ pipeline {
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn clean compile"
-            }
+            //}
             
             
             //post {
@@ -28,7 +28,7 @@ pipeline {
             //        archiveArtifacts 'target/*.jar'
             //    }
             //}
-        }
+        //}
         stage('Compile'){
                 steps{
                     sh 'mvn clean compile'
